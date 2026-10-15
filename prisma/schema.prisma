@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+// Plain Postgres: the same schema runs on local docker and on Supabase (swap DATABASE_URL).
+datasource db {
+  provider = "postgresql"
+}
+
+enum VideoStatus {
+  UPLOADING
+  READY
+  FAILED
+}
+
+model Video {
+  id            String      @id @default(cuid())
+  slug          String      @unique
+  /// Old slugs keep redirecting after a rename, so links already sent keep working.
+  previousSlugs String[]    @default([])
+  title         String
+  description   String      @default("")
+  status        VideoStatus @default(UPLOADING)
+  durationSec   Float       @default(0)
+  width         Int?
+  height        Int?
+  sizeBytes     BigInt      @default(0)
+  videoKey      String
+  posterKey     String?
+  gifKey        String?
+  uploadId      String?
+  /// [{ text, start, end }] word timings from the recorder, or null
+  transcript    Json?
+  /// [{ start, title }]
+  chapters      Json?
+  summary       String?
+  /// "Why I'm a fit" on the share page: profile facts matched to the job + video
+  pitch         String      @default("")
+  ogTitle       String?
+  ogDescription String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  views    ViewEvent[]
+  proposal Proposal?
+
+  @@index([createdAt])
+}
+
+/// One row per viewer per video, updated by progress beacons.
+model ViewEvent {
+  id         String   @id @default(cuid())
+  videoId    String
+  viewerId   String
+  maxPercent Int      @default(0)
+  watchedSec Float    @default(0)
+  referrer   String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  video Video @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  @@unique([videoId, viewerId])
+  @@index([videoId, createdAt])
+}
+
+model Proposal {
+  id         String   @id @default(cuid())
+  videoId    String   @unique
+  jobUrl     String   @default("")
+  jobPost    String   @default("")
+  /// Greeting + video title ("Hi Curtis 👋", "For Curtis: …")
+  clientName String   @default("")
+  body       String   @default("")
+  templateId String?
+  model      String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  video    Video           @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  template PromptTemplate? @relation(fields: [templateId], references: [id], onDelete: SetNull)
+}
+
+model PromptTemplate {
+  id        String   @id @default(cuid())
+  name      String
+  body      String
+  isDefault Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  proposals Proposal[]
+}
+
+/// Singleton rows (id "upwork"): OAuth state for an external MCP server. Secrets are AES-GCM
+/// encrypted with SESSION_SECRET (lib/crypto-box.ts).
+model Integration {
+  id           String    @id
+  clientInfo   String?
+  tokens       String?
+  codeVerifier String?
+  oauthState   String?
+  /// Cached tools/list from the server (names, descriptions, input schemas)
+  tools        Json?
+  connectedAt  DateTime?
+  updatedAt    DateTime  @updatedAt
+}
+
+/// Singleton (id "me"): who recorded the videos, shown beside every share page.
+model Profile {
+  id          String   @id @default("me")
+  name        String   @default("")
+  headline    String   @default("")
+  bio         String   @default("")
+  photoUrl    String   @default("")
+  /// Upwork (or other) profile link for the hire button
+  profileUrl  String   @default("")
+  /// Upwork stats shown in the profile card
+  jobSuccess  Int?
+  /// "Top Rated", "Rising Talent", …
+  badge       String   @default("")
+  rating      Float?
+  reviewCount Int?
+  totalJobs   Int?
+  totalHours  Int?
+  /// As Upwork shows it: "$2K+"
+  totalEarned String   @default("")
+  skills      String[] @default([])
+  /// [{ title, org, period, summary }]
+  experiences Json     @default("[]")
+  /// [{ name, issuer, date }]
+  certifications Json  @default("[]")
+  /// [{ text, rating, title, client, date }] client feedback
+  reviews     Json     @default("[]")
+  updatedAt   DateTime @updatedAt
+}

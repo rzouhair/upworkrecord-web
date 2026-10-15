@@ -1,0 +1,31 @@
+# Local stand-ins for production services. Swap by env only:
+#   Postgres → Supabase Postgres (DATABASE_URL)
+#   RustFS   → AWS S3 / Supabase Storage / R2 (S3_* vars). S3-compatible; MinIO's images left Docker Hub in 2025.
+name: upworkrecord
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: upworkrecord
+      POSTGRES_PASSWORD: upworkrecord
+      POSTGRES_DB: upworkrecord
+    ports: ['5434:5432']
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U upworkrecord']
+      interval: 2s
+      retries: 20
+
+  storage:
+    image: rustfs/rustfs:latest
+    environment:
+      RUSTFS_ACCESS_KEY: upworkrecord
+      RUSTFS_SECRET_KEY: upworkrecord-secret
+      RUSTFS_CONSOLE_ENABLE: 'true'
+    ports: ['9100:9000', '9101:9001']
+    volumes: [s3data:/data]
+
+volumes:
+  pgdata:
+  s3data:

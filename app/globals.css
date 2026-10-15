@@ -1,0 +1,233 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '../styles/air3-tokens.css';
+@import '../styles/air3-components.css';
+
+/* Design system: Upwork Air 3 (reference rebuild) — tokens + components live in /styles.
+   Everything below maps Tailwind / shadcn names onto Air 3 tokens, so utilities like
+   `text-muted-foreground` or `border-divider` resolve to Air 3 values in both themes.
+   Rules that matter: green text = --brand-green (via --text-link), never --up-green;
+   ink #181818, not black; 8px corners; one soft shadow; 2px ink focus ring. */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: var(--font-family-base);
+  --font-heading: var(--font-family-base);
+  --font-mono: var(--font-family-monospace);
+
+  /* App names → Air 3 semantic tokens (they swap in dark mode themselves) */
+  --color-surface: var(--bg-body);
+  --color-surface-dark: var(--bg-body);
+  --color-card-dark: var(--bg-body);
+  --color-divider: var(--border-color);
+  --color-divider-dark: var(--border-color);
+  --color-gray: var(--text-muted-on-body);
+  --color-brand: var(--text-link); /* text-safe green: brand-green light, up-green dark */
+  --color-brand-hover: var(--text-link-hover);
+  --color-brand-fill: var(--up-green);
+  --color-brand-fade: color-mix(in srgb, var(--up-green) 12%, transparent);
+  --color-ink: var(--up-black);
+  --color-success: var(--green);
+  --color-danger: var(--red);
+  --color-warning: var(--orange);
+  --color-hover: var(--bg-hoverable-light-hover);
+
+  /* shadcn names → Air 3 */
+  --color-background: var(--bg-body);
+  --color-foreground: var(--text-dark-on-body);
+  --color-card: var(--bg-body);
+  --color-card-foreground: var(--text-dark-on-body);
+  --color-popover: var(--bg-control);
+  --color-popover-foreground: var(--text-dark-on-body);
+  --color-primary: var(--bg-btn-dark);
+  --color-primary-foreground: var(--text-on-btn-dark);
+  --color-secondary: var(--bg-muted-light);
+  --color-secondary-foreground: var(--text-dark-on-body);
+  --color-muted: var(--bg-muted-light);
+  --color-muted-foreground: var(--text-light-on-body);
+  --color-accent: var(--bg-hoverable-light-hover);
+  --color-accent-foreground: var(--text-dark-on-body);
+  --color-destructive: var(--red);
+  --color-border: var(--border-color);
+  --color-input: var(--border-color-control);
+  --color-ring: var(--text-outline);
+
+  /* 8px house corner; 12 / 16 for bigger surfaces */
+  --radius-xs: var(--radius-2x);
+  --radius-sm: var(--radius-3x);
+  --radius-md: var(--radius-4x);
+  --radius-lg: var(--radius-4x);
+  --radius-xl: var(--radius-6x);
+  --radius-2xl: var(--radius-8x);
+
+  /* Air 3 has one elevation vocabulary: interactive (+hover) for clickable surfaces, popup for menus/dialogs */
+  --shadow-card: var(--shadow-interactive);
+  --shadow-card-hover: var(--shadow-interactive-hover);
+  --shadow-pop: var(--shadow-popup);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-family-base);
+  }
+
+  body {
+    background: var(--bg-body);
+    color: var(--text-dark-on-body);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    font-weight: var(--font-weight-body);
+    -webkit-font-smoothing: antialiased;
+    transition:
+      background-color var(--duration-base),
+      color var(--duration-base);
+  }
+
+  ::selection {
+    background: var(--bg-mark);
+    color: var(--up-black);
+  }
+
+  /* App headings: page title h1 = Air 3 h3 (28), section h2 = h5 (20), panel h3 = 16/500. */
+  h1 {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+    letter-spacing: var(--letter-spacing-h3);
+    font-weight: var(--font-weight-heading);
+  }
+  h2 {
+    font-size: var(--font-size-h5);
+    line-height: var(--line-height-h5);
+    letter-spacing: var(--letter-spacing-h5);
+    font-weight: var(--font-weight-heading);
+  }
+  h3 {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-h6);
+    font-weight: var(--font-weight-strong);
+  }
+
+  /* Air 3 controls (.uw-input): 40px, 8px, 1px gray-50 → ink on hover, 2px ink outline on focus */
+  input:not([type='checkbox'], [type='radio'], [type='range'], [type='file'], [type='search']),
+  textarea,
+  select {
+    width: 100%;
+    min-height: var(--height-base);
+    padding: 0 var(--spacing-3x);
+    border: 1px solid var(--border-color-control);
+    border-radius: var(--radius-control);
+    background: var(--bg-control);
+    color: var(--text-dark-on-control);
+    font: var(--font-weight-body) var(--font-size-base-sm) / 1.4 var(--font-family-base);
+    transition:
+      border-color var(--duration-base),
+      box-shadow var(--duration-base);
+  }
+  textarea {
+    padding: var(--spacing-2x) var(--spacing-3x);
+  }
+  select {
+    appearance: none;
+    padding-right: var(--spacing-10x);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 6l4 4 4-4' fill='none' stroke='%23676767' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--text-light-on-control);
+  }
+  input:hover:not(:disabled, [readonly]),
+  textarea:hover:not(:disabled),
+  select:hover:not(:disabled) {
+    border-color: var(--border-color-control-hover);
+  }
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: var(--width-outline) solid var(--text-outline);
+    outline-offset: 1px;
+    border-color: var(--border-color-control-selected);
+  }
+  input[readonly] {
+    background: var(--bg-muted-light);
+  }
+
+  label {
+    display: block;
+    margin-bottom: var(--spacing-2x);
+    font-size: var(--font-size-base-sm);
+    font-weight: var(--font-weight-label);
+    color: var(--text-dark-on-body);
+  }
+
+  /* Focus = 2px ink outline (white in dark mode) */
+  :where(a, button, summary, [tabindex]):focus-visible {
+    outline: var(--width-outline) solid var(--text-outline);
+    outline-offset: 2px;
+  }
+
+  * {
+    border-color: var(--border-color);
+  }
+}
+
+:root {
+  /* Route view-transition timings (Air 3 owns --duration-*). */
+  --vt-exit: 150ms;
+  --vt-enter: 210ms;
+}
+
+::view-transition-old(.fade-out) {
+  animation: var(--vt-exit) ease-in fade reverse;
+}
+
+::view-transition-new(.fade-in) {
+  animation: var(--vt-enter) ease-out var(--vt-exit) both fade;
+}
+
+@keyframes fade {
+  from {
+    filter: blur(3px);
+    opacity: 0;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-group(sidebar),
+::view-transition-group(mobile-nav),
+::view-transition-group(theme-toggle) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(sidebar) {
+  display: none;
+}
+
+::view-transition-new(sidebar),
+::view-transition-old(mobile-nav),
+::view-transition-new(mobile-nav),
+::view-transition-old(theme-toggle),
+::view-transition-new(theme-toggle) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}

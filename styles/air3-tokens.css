@@ -1,0 +1,219 @@
+/* Upwork Air 3 tokens, copied from ~/Downloads/Upwork Design System/tokens/*.css (reference rebuild,
+   not an official Upwork asset). Dark selector changed from [data-theme=dark] to .dark (next-themes). */
+/* Colour — Upwork Air 3. Variable names are Upwork's own (from the shipped
+   Air 3 CSS, archived upwork.com 2026-09-21). Base palette first, then the
+   light semantic layer ([theme=air-3-0]) on :root, dark on .dark. */
+:root{
+  /* ── Brand ── */
+  --up-green:#14a800;        /* THE Upwork green: accents, icons, hover of brand-green */
+  --up-green-dark:#3c8224;
+  --up-green-hc:#0c5c00;
+  --brand-green:#108a00;     /* text-safe green: primary buttons, links (4.5:1 on white) */
+  --brand-green-hc:#0b6100;
+  --up-lime:#95df00;
+  --up-black:#181818;        /* ink */
+  --up-black-dark:#0e0e0e;
+  --uma:#d2ff00;             /* Uma (AI) accent */
+  --black:#000;
+  --white:#fff;
+
+  /* ── Gray ramp ── */
+  --gray-10:#1a1a1a; --gray-15:#1e1e1e; --gray-20:#252525; --gray-25:#333; --gray-30:#3c3c3c;
+  --gray-40:#535353; --gray-45:#676767; --gray-50:#8d8c8c; --gray-55:#a5a5a5; --gray-60:#c6c6c6;
+  --gray-70:#d9d9d9; --gray-80:#e9e9e9; --gray-90:#f1f1f1; --gray-95:#f9f9f9;
+
+  /* ── Hue families (darkest → lightest) ── */
+  --green-darkest:#113b11; --green-dark:#195719; --green:#34b234; --green-light:#61d161; --green-lightest:#effcef;
+  --mint-darkest:#083b2d; --mint-dark:#0f7156; --mint:#14b88d; --mint-light:#66ccb0; --mint-lightest:#e8fdf7; --mint-green:#cfffcf;
+  --blue-darkest:#103156; --blue-dark:#024997; --blue:#086add; --blue-light:#66aacc; --blue-lightest:#f3f8fe;
+  --purple-darkest:#321c5f; --purple-dark:#3d05ae; --purple:#4e06e0; --purple-light:#a385e0; --purple-lightest:#f8f5ff;
+  --yellow-darkest:#353612; --yellow-dark:#7b6e05; --yellow:#d9c407; --yellow-light:#c5b253; --yellow-lightest:#fefae2;
+  --orange-darkest:#4a2c0d; --orange-dark:#934d06; --orange:#df7606; --orange-light:#cc9b66; --orange-lightest:#fff8f0; --orange-red:#ff4b25;
+  --red-darkest:#3c2120; --red-dark:#950a04; --red:#c70e05; --red-light:#db7770; --red-lightest:#fef6f5;
+
+  /* ── Highlight / illustration hues ── */
+  --forest:#13544e; --sky:#5cf5ff; --brown:#67541f; --kiwi:#97922d; --brick:#9b211b;
+  --clay:#bc5118; --pink:#f66dbc; --lilac:#bda1e7; --heather:#a18085;
+
+  /* ── Gradients ── */
+  --gradient-lime-green:linear-gradient(90deg,#dff69b,#95e79b 50%,#a9f9b2);            /* upsell / Business Plus banner */
+  --gradient-lime-green-diagonal:linear-gradient(158deg,#dff69b,#95e79b 50%,#80de8e);
+  --gradient-green-light:linear-gradient(158deg,#bdef9b,#afec9b);                       /* "Popular" tag */
+  --gradient-search-banner:linear-gradient(135deg,#52dc1c,#3cd828,#00cc4a,#00c12b,#00ca4f,#47dc26);
+
+  /* ════ Semantic — light (Air 3 [theme=air-3-0]) ════ */
+  --bg-body:var(--white);
+  --text-dark-on-body:var(--up-black);
+  --text-light-on-body:var(--gray-45);
+  --text-muted-on-body:var(--gray-55);
+  --text-accent-on-body:var(--up-green);
+  --bg-muted-light:var(--gray-95);
+  --bg-muted-dark:var(--gray-80);
+  --bg-dark:var(--up-black);
+  --text-on-dark:var(--white);
+  --bg-accent:var(--up-green);
+  --text-on-accent:var(--white);
+  --bg-selected:var(--up-black);
+  --text-on-selected:var(--white);
+  --bg-mark:var(--mint-green);
+  --bg-disabled:var(--gray-80);
+  --text-on-disabled:var(--gray-55);
+  --bg-hoverable-light-hover:var(--gray-90);
+
+  --border-color:var(--gray-80);
+  --border:1px solid var(--border-color);
+
+  --text-link:var(--brand-green);
+  --text-link-hover:var(--up-green);
+  --text-outline:var(--up-black);          /* focus ring colour */
+
+  /* buttons: dark = primary, light = secondary, muted = tertiary */
+  --bg-btn-dark:var(--brand-green);        --bg-btn-dark-hover:var(--up-green);        --text-on-btn-dark:var(--white);
+  --bg-btn-light:var(--white);             --bg-btn-light-hover:var(--gray-95);        --text-on-btn-light:var(--brand-green); --text-on-btn-light-hover:var(--up-green);
+  --bg-btn-muted:var(--white);             --bg-btn-muted-hover:var(--gray-95);        --text-on-btn-muted:var(--brand-green); --border-color-btn-muted:var(--gray-70);
+  --bg-btn-circle-hover:var(--gray-90);    --text-on-btn-circle:var(--up-black);
+  --bg-btn-negative-dark:var(--red);       --bg-btn-negative-dark-hover:var(--red-dark);
+
+  /* controls (inputs, checks) */
+  --bg-control:var(--white);
+  --text-dark-on-control:var(--up-black);
+  --text-light-on-control:var(--gray-45);
+  --border-color-control:var(--gray-50);
+  --border-color-control-hover:var(--up-black);
+  --border-color-control-selected:var(--up-black);
+  --border-color-control-check-selected:var(--brand-green);
+  --text-icon-on-control-check:var(--brand-green);
+
+  /* status */
+  --bg-info-light:var(--blue-lightest);     --text-on-info-light:var(--blue-dark);
+  --bg-success-light:var(--green-lightest); --text-on-success-light:var(--green-dark);
+  --bg-warning-light:var(--yellow-lightest);--text-on-warning-light:var(--yellow-dark);
+  --bg-danger-light:var(--red-lightest);    --text-on-danger-light:var(--red-dark);
+  --bg-promoted-light:var(--purple-lightest);--text-on-promoted-light:var(--purple-dark);
+  --bg-notification:var(--orange-red);
+
+  /* surfaces */
+  --bg-tooltip:var(--up-black);   --text-on-tooltip:var(--white);
+  --bg-footer:var(--up-black);    --text-on-footer:var(--white);  --text-light-on-footer:var(--gray-55);
+  --bg-review-card:rgba(255,255,255,.95);
+  --bg-loader-1:var(--gray-80); --bg-loader-2:var(--gray-70);
+}
+
+/* ════ Semantic — dark (Air 3 html[theme=dark]) ════ */
+.dark{
+  --bg-body:var(--up-black);
+  --text-dark-on-body:var(--white);
+  --text-light-on-body:var(--gray-55);
+  --text-muted-on-body:var(--gray-45);
+  --bg-muted-light:var(--gray-15);
+  --bg-muted-dark:var(--gray-25);
+  --bg-dark:var(--white);
+  --text-on-dark:var(--up-black);
+  --bg-selected:var(--white);
+  --text-on-selected:var(--up-black);
+  --bg-disabled:var(--gray-25);
+  --text-on-disabled:var(--gray-45);
+  --bg-hoverable-light-hover:var(--gray-20);
+  --border-color:var(--gray-25);
+  --text-link:var(--up-green);
+  --text-link-hover:var(--green-light);
+  --text-outline:var(--white);
+  --bg-btn-dark:var(--up-green);           --bg-btn-dark-hover:var(--brand-green);
+  --bg-btn-light:var(--up-black);          --bg-btn-light-hover:var(--gray-15);        --text-on-btn-light:var(--up-green);   --text-on-btn-light-hover:var(--green-light);
+  --bg-btn-muted:var(--up-black);          --bg-btn-muted-hover:var(--gray-15);        --text-on-btn-muted:var(--up-green);   --border-color-btn-muted:var(--gray-30);
+  --bg-btn-circle-hover:var(--gray-20);    --text-on-btn-circle:var(--white);
+  --bg-control:var(--up-black);
+  --text-dark-on-control:var(--white);
+  --text-light-on-control:var(--gray-55);
+  --border-color-control:var(--gray-50);
+  --border-color-control-hover:var(--white);
+  --border-color-control-selected:var(--white);
+  --border-color-control-check-selected:var(--up-green);
+  --text-icon-on-control-check:var(--up-green);
+  --bg-info-light:var(--blue-darkest);     --text-on-info-light:var(--blue-lightest);
+  --bg-success-light:var(--green-darkest); --text-on-success-light:var(--green-lightest);
+  --bg-warning-light:var(--yellow-darkest);--text-on-warning-light:var(--yellow-lightest);
+  --bg-danger-light:var(--red-darkest);    --text-on-danger-light:var(--red-lightest);
+  --bg-promoted-light:var(--purple-darkest);--text-on-promoted-light:var(--purple-lightest);
+  --bg-tooltip:var(--white);  --text-on-tooltip:var(--up-black);
+  --bg-footer:var(--gray-10);
+  --bg-review-card:rgba(24,24,24,.95);
+  --bg-loader-1:var(--gray-25); --bg-loader-2:var(--gray-30);
+}
+
+/* Type — Air 3. One family (Neue Montreal → Hanken Grotesk). Headings 550,
+   body 400, UI labels 500. Headings run POSITIVE tracking (+.34–.48px) at
+   mobile sizes and 0 at the -lg desktop sizes. Sizes are px, not rem. */
+:root{
+  --font-family-base:var(--font-hanken),"Hanken Grotesk","PP Neue Montreal","Neue Montreal",Helvetica,Arial,sans-serif;
+  --font-family-monospace:menlo,monaco,consolas,"Courier New",monospace;
+
+  --font-weight-body:400; --font-weight-base:500; --font-weight-strong:500; --font-weight-label:500; --font-weight-heading:550;
+  --font-weight-300:300; --font-weight-370:370; --font-weight-450:450; --font-weight-500:500; --font-weight-550:550; --font-weight-600:600; --font-weight-700:700;
+
+  --font-size-h1-lg:72px; --line-height-h1-lg:104%;
+  --font-size-h2-lg:64px; --line-height-h2-lg:104%;
+  --font-size-h3-lg:56px; --line-height-h3-lg:104%;
+  --font-size-h4-lg:48px; --line-height-h4-lg:104%;
+  --font-size-h1:40px; --line-height-h1:110%; --letter-spacing-h1:.4px;
+  --font-size-h2:34px; --line-height-h2:110%; --letter-spacing-h2:.34px;
+  --font-size-h3:28px; --line-height-h3:110%; --letter-spacing-h3:.42px;
+  --font-size-h4:24px; --line-height-h4:110%; --letter-spacing-h4:.36px;
+  --font-size-h5:20px; --line-height-h5:120%; --letter-spacing-h5:.4px;
+  --font-size-h6:18px; --line-height-h6:120%; --letter-spacing-h6:.36px;
+  --font-size-quote:32px; --line-height-quote:120%; --letter-spacing-quote:.32px;
+  --font-size-base-lg:20px; --line-height-base-lg:150%; --letter-spacing-base-lg:.6px;
+  --font-size-base:16px; --line-height-base:150%; --letter-spacing-base:.48px;
+  --font-size-base-sm:14px; --line-height-base-sm:22px; --letter-spacing-base-sm:.42px;
+  --font-size-base-xs:12px; --line-height-base-xs:120%;
+  --letter-spacing-eyebrow:1.2px;
+}
+
+/* Spacing — Air 3's 4px grid, named by multiple ("4x" = 16px). */
+:root{
+  --spacing-1x:4px; --spacing-2x:8px; --spacing-3x:12px; --spacing-4x:16px; --spacing-5x:20px; --spacing-6x:24px;
+  --spacing-8x:32px; --spacing-10x:40px; --spacing-12x:48px; --spacing-14x:56px; --spacing-16x:64px; --spacing-20x:80px; --spacing-24x:96px;
+  --height-sm:32px; --height-base:40px;          /* controls & buttons */
+  --container-width:1280px; --max-width-global-container:1600px;
+  --gap-column:var(--spacing-4x); --gap-row:var(--spacing-4x);
+  --spacing-mobile-x:var(--spacing-4x);
+}
+
+/* Shape & elevation — Air 3. Controls/buttons/cards 8px; category cards 12px;
+   plan + review cards 16px; hero/banners 16px; chips & nav CTA pill. One
+   signature shadow: --shadow-interactive (soft offset + 1px ring). */
+:root{
+  --radius-1x:2px; --radius-2x:4px; --radius-3x:6px; --radius-4x:8px; --radius-6x:12px; --radius-8x:16px;
+  --radius-12x:24px; --radius-14x:28px; --radius-18x:36px; --radius-20x:40px; --radius-pill:10rem;
+  --radius-btn:var(--radius-4x); --radius-control:var(--radius-4x); --radius-card:var(--radius-4x);
+
+  --border-width:1px; --border-width-btn:2px; --width-outline:2px;
+
+  --shadow-interactive:2px 2px 8px 2px rgba(24,24,24,.08),0 0 0 1px var(--border-color);
+  --shadow-interactive-hover:4px 4px 8px 2px rgba(24,24,24,.12),0 0 0 1px var(--border-color);
+  --shadow-popup:0 0 0 1px var(--border-color),0 8px 24px 2px rgba(24,24,24,.12);
+  --shadow-review:2px 2px 16px 2px rgba(144,144,144,.07);
+  --opacity-backdrop:.6;
+}
+.dark{
+  --shadow-interactive:2px 2px 8px 2px rgba(255,255,255,.08),0 0 0 1px var(--border-color);
+  --shadow-interactive-hover:4px 4px 8px 2px rgba(255,255,255,.12),0 0 0 1px var(--border-color);
+}
+
+/* Motion — Air 3 is quiet: colour/background swaps at .2s, a .96 press scale,
+   hero fade-in .4s. The one "designed" curve is ease-out-quart (.25,1,.5,1)
+   used on toggle-group thumbs and drawers. */
+:root{
+  --ease-standard:cubic-bezier(.4,0,.2,1);
+  --ease-out-quart:cubic-bezier(.25,1,.5,1);   /* toggle thumb, drawers */
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);  /* small pops (badges) */
+  --ease-soft:cubic-bezier(.3,.7,.3,1);
+  --duration-fast:.1s;   /* press */
+  --duration-base:.2s;   /* hover colour, card lift */
+  --duration-slow:.3s;   /* how-it-works cards */
+  --duration-enter:.4s;  /* hero fade-in */
+  --scale-press:.96;
+  --reduced-motion:.96;
+}
+@media (prefers-reduced-motion:reduce){:root{--reduced-motion:1;--duration-base:0s;--duration-slow:0s;--duration-enter:0s}}
+
